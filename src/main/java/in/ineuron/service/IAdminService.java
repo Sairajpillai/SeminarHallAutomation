@@ -1,6 +1,7 @@
 package in.ineuron.service;
 
 import in.ineuron.dto.DepartmentDTO;
+import in.ineuron.dto.HallDTO;
 
 public interface IAdminService {
 	
@@ -12,5 +13,11 @@ public interface IAdminService {
 	
 	public String updateDepartment(DepartmentDTO department);
 	
+	public String saveHall(HallDTO halldto);
+	
+	public HallDTO findHall(String name);
 
+	public String updateHall(HallDTO hall);
+	
+	public String removeHall(String name);
 }

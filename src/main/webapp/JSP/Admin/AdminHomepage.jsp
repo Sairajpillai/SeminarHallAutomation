@@ -17,5 +17,10 @@
 <a href="../JSP/Admin/SearchDepartment.jsp">Search Department</a>
 <a href="../JSP/Admin/UpdateDepartment.jsp">Update Department</a>
 <a href="../JSP/Admin/DeleteDepartment.jsp">Delete Department</a>
+<br>
+<a href="../JSP/Admin/Department/AddHall.jsp">Add Hall</a>
+<a href="../JSP/Admin/Department/SearchHall.jsp">Search Hall</a>
+<a href="../JSP/Admin/Department/UpdateHall.jsp">Update Hall</a>
+<a href="../JSP/Admin/Department/DeleteHall.jsp">Delete Department</a>
 </body>
 </html>

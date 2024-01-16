@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import in.ineuron.dto.DepartmentDTO;
+import in.ineuron.dto.HallDTO;
 import in.ineuron.util.JDBCUtil;
 
 public class AdminDAOImpl implements IAdminDAO {
@@ -133,6 +134,121 @@ public class AdminDAOImpl implements IAdminDAO {
 			e.printStackTrace();
 		}
 		return "faliure";
+	}
+
+	@Override
+	public String addHall(HallDTO halldto) {
+		String status = "failure";
+		String insertQuery = "insert into hall(hallname,hallfloor,createddate,adminid_fk) values(?,?,?,?)";
+		try {
+			con = JDBCUtil.getJdbcConnection();
+			if(con!=null) {
+				ps = con.prepareStatement(insertQuery);
+			}
+			if(ps!=null) {
+				ps.setString(1,halldto.getHallname());
+				ps.setString(2,halldto.getHallfloor());
+				ps.setDate(3,halldto.getCdate());
+				ps.setInt(4,1);
+				
+				int rowEffected = ps.executeUpdate();
+				if(rowEffected==1) {
+					status="success";
+				}
+			}
+		}catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return status;
+	}
+
+	@Override
+	public HallDTO findHall(String name) {
+		HallDTO dto = null;
+		//String sqlQuery = "select hallid,hallname,hallfloor,createddate from hall where hallname=?";
+		String sqlQuery = "select hallid,hallname,hallfloor,h.createddate,adminname from hall h inner join admin a on "+
+				          "h.adminid_fk=a.adminid where hallname=?";
+		try {
+			con = JDBCUtil.getJdbcConnection();
+			if (con != null) {
+				ps = con.prepareStatement(sqlQuery);
+			}
+			if (ps != null) {
+				ps.setString(1, name);
+				rs = ps.executeQuery();
+			}
+			if (rs != null) {
+				while (rs.next()) {
+					dto=new HallDTO();
+					dto.setHallid(rs.getInt(1));
+					dto.setHallname(rs.getString(2));
+					dto.setHallfloor(rs.getString(3));
+					dto.setCdate(rs.getDate(4));
+					dto.setCreatedby(rs.getString(5));
+				}
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
+	@Override
+	public String updateHall(HallDTO hall) {
+		String sqlUpdateQuery = "update hall set hallname=?,hallfloor=?,modifieddate=? where hallid=?";
+		try {
+			con = JDBCUtil.getJdbcConnection();
+			if (con != null) {
+				ps = con.prepareStatement(sqlUpdateQuery);
+			}
+			if (ps != null) {
+				ps.setString(1, hall.getHallname());
+				ps.setString(2, hall.getHallfloor());
+				ps.setDate(3, hall.getMdate());
+				ps.setInt(4, hall.getHallid());
+				
+
+				int rowEffected = ps.executeUpdate();
+				if (rowEffected == 1) {
+					return "success";
+				}
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "faliure";
+	}
+
+	@Override
+	public String removeHall(String name) {
+		String sqlQuery = "delete from hall where hallname = ?";
+		String result = "failure";
+		int rowsEffected = 0;
+		try {
+			con = JDBCUtil.getJdbcConnection();
+			if (con != null) {
+				ps = con.prepareStatement(sqlQuery);
+			}
+			if(ps!=null) {
+				ps.setString(1, name);
+				rowsEffected = ps.executeUpdate();
+			}
+			if(rowsEffected==1) {
+				result="success";
+				System.out.println(result+" in DAOImpl");
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }
