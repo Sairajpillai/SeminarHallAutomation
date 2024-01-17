@@ -35,8 +35,14 @@ public class AdminServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		if(request.getRequestURI().endsWith(("home"))) {
+			Integer loginid = Integer.parseInt(request.getParameter("loginid"));
+			String loginpassword = request.getParameter("loginpassword");
+			
+			Boolean result = service.isAdmin(loginid, loginpassword);
+			
 			RequestDispatcher rd = null;
 			rd = request.getRequestDispatcher("../JSP/Admin/AdminHomepage.jsp");
+			request.setAttribute("result", result);
 			rd.forward(request, response);
 		}
 		

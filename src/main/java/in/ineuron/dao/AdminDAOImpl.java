@@ -251,4 +251,38 @@ public class AdminDAOImpl implements IAdminDAO {
 		return result;
 	}
 
+	@Override
+	public Boolean isAdmin(Integer id, String password) {
+		Boolean status = false;
+		String sqlQuery = "select count(*) as row_count from admin where adminid=? and adminpassword=?";
+		int rowcount=0;
+		try {
+			con = JDBCUtil.getJdbcConnection();
+			if (con != null) {
+				ps = con.prepareStatement(sqlQuery);
+			}
+			if (ps != null) {
+				ps.setInt(1, id);
+				ps.setString(2, password);
+				rs = ps.executeQuery();
+
+			}
+			
+			if (rs != null) {
+				if (rs.next()) {
+					rowcount=rs.getInt("row_count");
+				}
+			}
+			if(rowcount==1) {
+				status=true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return status;
+	}
+
 }

@@ -20,4 +20,6 @@ public interface IAdminDAO {
 	public String updateHall(HallDTO hall);
 	
 	public String removeHall(String name);
+	
+	public Boolean isAdmin(Integer id,String password);
 }

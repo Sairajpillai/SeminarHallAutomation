@@ -61,4 +61,9 @@ public class AdminServiceImpl implements IAdminService {
 		return adminDao.removeHall(name);
 	}
 
+	@Override
+	public Boolean isAdmin(Integer id, String password) {
+		return adminDao.isAdmin(id, password);
+	}
+
 }
