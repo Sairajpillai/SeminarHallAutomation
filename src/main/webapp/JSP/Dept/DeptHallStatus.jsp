@@ -9,12 +9,20 @@
 </head>
 <body>
 <c:choose>
-<c:when test="${result eq 'success' }">
-<h1>Record Deleted Successfully</h1>
+<c:when test="${dto eq null }">
+<h1>You have not requested for any Hall.</h1>
 </c:when>
 <c:otherwise>
-<h1>Record Not available for deletion</h1>
+<c:forEach items="${dto}" var="halldto" >
+Hall Id : ${halldto.hallid }<br/>
+Hall Name : ${halldto.hallname }<br/>
+Hall floor : ${halldto.hallfloor }<br/>
+Hall Status : ${halldto.status }<br/>
+Hall Booking Requested Date : ${halldto.halldate }<br/>
+Hall Requested Date : ${halldto.requesteddate }<br/>
+</c:forEach>
 </c:otherwise>
+
 </c:choose>
 </body>
 </html>

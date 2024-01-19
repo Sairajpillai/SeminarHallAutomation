@@ -11,7 +11,35 @@ public class HallDTO {
 	private Date mdate;
 	private Integer adminid_fk;
 	private String createdby;
+	private String status;
+	private Date bookeddate;
+	private Date halldate;
+	private Date requesteddate;
 	
+	public Date getHalldate() {
+		return halldate;
+	}
+	public void setHalldate(Date halldate) {
+		this.halldate = halldate;
+	}
+	public Date getRequesteddate() {
+		return requesteddate;
+	}
+	public void setRequesteddate(Date requesteddate) {
+		this.requesteddate = requesteddate;
+	}
+	public Date getBookeddate() {
+		return bookeddate;
+	}
+	public void setBookeddate(Date bookeddate) {
+		this.bookeddate = bookeddate;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getCreatedby() {
 		return createdby;
 	}
@@ -57,7 +85,8 @@ public class HallDTO {
 	@Override
 	public String toString() {
 		return "HallDTO [hallid=" + hallid + ", hallname=" + hallname + ", hallfloor=" + hallfloor + ", cdate=" + cdate
-				+ ", mdate=" + mdate + ", adminid_fk=" + adminid_fk + ", createdby=" + createdby + "]";
+				+ ", mdate=" + mdate + ", adminid_fk=" + adminid_fk + ", createdby=" + createdby + ", status=" + status
+				+ ", bookeddate=" + bookeddate + ", halldate=" + halldate + ", requesteddate=" + requesteddate + "]";
 	}
 	
 	
