@@ -232,6 +232,50 @@ public class DeptDAOImpl implements IDeptDAO {
 		}
 		return listDTO;
 	}
+
+	@Override
+	public List<HallDTO> hallHistory(Integer deptId) {
+		
+		 List<HallDTO> listDTO = new ArrayList<HallDTO>();
+			
+			String sqlQuery = "SELECT hi.hallid, hi.hallname, hi.hallfloor, hb.status,hb.requesteddate,hb.halldate,\r\n"
+					+ "hb.statusdate,hb.bookeddate\r\n"
+					+ "FROM hall hi\r\n"
+					+ "JOIN hallbooking hb ON hi.hallid = hb.hallid_fk\r\n"
+					+ "where hb.deptid_fk=?";
+			
+			try {
+				con = JDBCUtil.getJdbcConnection();
+				if (con != null) {
+					ps = con.prepareStatement(sqlQuery);
+				}
+				if (ps != null) {
+					ps.setInt(1, deptId);
+					rs = ps.executeQuery();
+				}
+				if (rs != null) {
+					while (rs.next()) {
+						HallDTO dto=new HallDTO();
+						dto.setHallid(rs.getInt(1));
+						dto.setHallname(rs.getString(2));
+						dto.setHallfloor(rs.getString(3));
+						dto.setStatus(rs.getString(4));
+						dto.setRequesteddate(rs.getDate(5));
+						dto.setHalldate(rs.getDate(6));
+						dto.setStatusDate(rs.getDate(7));
+						dto.setBookeddate(rs.getDate(8));;
+						
+						listDTO.add(dto);
+						
+					}
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return listDTO;
+	}
 	
 	
 

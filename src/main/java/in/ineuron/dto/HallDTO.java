@@ -15,7 +15,14 @@ public class HallDTO {
 	private Date bookeddate;
 	private Date halldate;
 	private Date requesteddate;
+	private Date statusDate;
 	
+	public Date getStatusDate() {
+		return statusDate;
+	}
+	public void setStatusDate(Date statusDate) {
+		this.statusDate = statusDate;
+	}
 	public Date getHalldate() {
 		return halldate;
 	}
@@ -86,7 +93,8 @@ public class HallDTO {
 	public String toString() {
 		return "HallDTO [hallid=" + hallid + ", hallname=" + hallname + ", hallfloor=" + hallfloor + ", cdate=" + cdate
 				+ ", mdate=" + mdate + ", adminid_fk=" + adminid_fk + ", createdby=" + createdby + ", status=" + status
-				+ ", bookeddate=" + bookeddate + ", halldate=" + halldate + ", requesteddate=" + requesteddate + "]";
+				+ ", bookeddate=" + bookeddate + ", halldate=" + halldate + ", requesteddate=" + requesteddate
+				+ ", statusDate=" + statusDate + "]";
 	}
 	
 	

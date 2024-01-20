@@ -76,4 +76,9 @@ public class DeptServiceImpl implements IDeptService{
 		return deptDAO.bookingStatus(deptId);
 	}
 
+	@Override
+	public List<HallDTO> hallHistory(Integer deptId) {
+		return deptDAO.hallHistory(deptId);
+	}
+
 }

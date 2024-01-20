@@ -19,5 +19,7 @@ public interface IDeptDAO {
 	public HallDTO checkRequested(String hallname,Date date,Integer deptid);
 	
 	public List<HallDTO> bookingStatus(Integer deptId);
+	
+	public List<HallDTO> hallHistory(Integer deptId);
 
 }

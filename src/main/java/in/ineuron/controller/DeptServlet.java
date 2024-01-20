@@ -118,6 +118,17 @@ public class DeptServlet extends HttpServlet {
 			rd.forward(request, response);
 		}
 		
+		if(request.getRequestURI().endsWith("/HallHistory")) {
+			System.out.println("Reached Booking Status");
+			Integer loginid=(Integer) session.getAttribute("loginid");
+			List<HallDTO> dto = service.hallHistory(loginid);
+			
+			RequestDispatcher rd = null;
+			request.setAttribute("dto", dto);
+			rd = request.getRequestDispatcher("../JSP/Dept/HallHistory.jsp");
+			rd.forward(request, response);
+		}
+		
 	}
 
 }

@@ -19,5 +19,7 @@ public interface IDeptService {
 	public HallDTO checkRequested(String hallname, String date, Integer deptid);
 	
 	public List<HallDTO> bookingStatus(Integer deptId);
+	
+	public List<HallDTO> hallHistory(Integer deptId);
 
 }
