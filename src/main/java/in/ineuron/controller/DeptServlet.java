@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import in.ineuron.dto.HallApprovalDTO;
 import in.ineuron.dto.HallDTO;
 import in.ineuron.service.IDeptService;
 import in.ineuron.servicefactory.DeptServiceFactory;
@@ -128,6 +129,29 @@ public class DeptServlet extends HttpServlet {
 			rd = request.getRequestDispatcher("../JSP/Dept/HallHistory.jsp");
 			rd.forward(request, response);
 		}
+		
+		if(request.getRequestURI().endsWith("/DeleteRequest")) {
+			Integer loginid=(Integer) session.getAttribute("loginid");
+			List<HallApprovalDTO> dto = service.selectRequestsForDeletion(loginid);
+			
+			RequestDispatcher rd = null;
+			request.setAttribute("dto", dto);
+			rd = request.getRequestDispatcher("../JSP/Dept/DeptDeletePage.jsp");
+			rd.forward(request, response);
+		}
+		
+		if(request.getRequestURI().endsWith("/DeleteBookingRequest")) {
+			Integer bookingid = Integer.parseInt(request.getParameter("hallbookingid"));
+			String status = service.deleteRequest(bookingid);
+			System.out.println(status);
+			
+			RequestDispatcher rd = null;
+			request.setAttribute("status", status);
+			rd = request.getRequestDispatcher("../JSP/Dept/DeptDeleteResult.jsp");
+			rd.forward(request, response);
+			
+		}
+		
 		
 	}
 

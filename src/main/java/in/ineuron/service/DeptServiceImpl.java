@@ -7,6 +7,7 @@ import java.util.List;
 import in.ineuron.dao.IDeptDAO;
 import in.ineuron.daofactory.DeptDAOFactory;
 import in.ineuron.dto.BookingDTO;
+import in.ineuron.dto.HallApprovalDTO;
 import in.ineuron.dto.HallDTO;
 
 public class DeptServiceImpl implements IDeptService{
@@ -79,6 +80,16 @@ public class DeptServiceImpl implements IDeptService{
 	@Override
 	public List<HallDTO> hallHistory(Integer deptId) {
 		return deptDAO.hallHistory(deptId);
+	}
+
+	@Override
+	public List<HallApprovalDTO> selectRequestsForDeletion(Integer deptId) {
+		return deptDAO.selectRequestsForDeletion(deptId);
+	}
+
+	@Override
+	public String deleteRequest(Integer bookingId) {
+		return deptDAO.deleteRequest(bookingId);
 	}
 
 }

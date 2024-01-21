@@ -1,8 +1,11 @@
 package in.ineuron.dto;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class BookingDTO {
+public class BookingDTO implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private Integer bookingid;
 	private String status;

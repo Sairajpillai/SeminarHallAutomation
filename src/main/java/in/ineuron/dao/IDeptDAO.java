@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import in.ineuron.dto.BookingDTO;
+import in.ineuron.dto.HallApprovalDTO;
 import in.ineuron.dto.HallDTO;
 
 public interface IDeptDAO {
@@ -21,5 +22,9 @@ public interface IDeptDAO {
 	public List<HallDTO> bookingStatus(Integer deptId);
 	
 	public List<HallDTO> hallHistory(Integer deptId);
+	
+	public List<HallApprovalDTO> selectRequestsForDeletion(Integer deptId);
+	
+	public String deleteRequest(Integer bookingId);
 
 }

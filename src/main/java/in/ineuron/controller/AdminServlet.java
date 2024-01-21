@@ -37,7 +37,7 @@ public class AdminServlet extends HttpServlet {
 		if(request.getRequestURI().endsWith(("home"))) {
 			Integer loginid = Integer.parseInt(request.getParameter("loginid"));
 			String loginpassword = request.getParameter("loginpassword");
-			
+			session.setAttribute("loginid", loginid);
 			Boolean result = service.isAdmin(loginid, loginpassword);
 			
 			RequestDispatcher rd = null;

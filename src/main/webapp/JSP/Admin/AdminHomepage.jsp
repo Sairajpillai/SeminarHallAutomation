@@ -22,5 +22,8 @@
 <a href="../JSP/Admin/Department/SearchHall.jsp">Search Hall</a>
 <a href="../JSP/Admin/Department/UpdateHall.jsp">Update Hall</a>
 <a href="../JSP/Admin/Department/DeleteHall.jsp">Delete Department</a>
+<br>
+<a href="../AdminHallApproval/ApproveRequest">View Requests</a>
+<a href="../AdminHallApproval/BookingHistory">Booking History</a>
 </body>
 </html>

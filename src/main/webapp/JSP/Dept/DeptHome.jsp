@@ -16,6 +16,7 @@
 <a href="../JSP/Dept/DeptHallStatus.jsp">Hall booking Status</a>-->
 <a href="../DeptServlet/BookingStatus">Hall booking Status</a>
 <a href="../DeptServlet/HallHistory">Hall History</a>
+<a href="../DeptServlet/DeleteRequest">Hall Request</a>
 </c:when>
 <c:otherwise>
 <h1>

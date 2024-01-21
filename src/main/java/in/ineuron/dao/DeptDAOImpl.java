@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.ineuron.dto.BookingDTO;
+import in.ineuron.dto.HallApprovalDTO;
 import in.ineuron.dto.HallDTO;
 import in.ineuron.util.JDBCUtil;
 
@@ -275,6 +276,73 @@ public class DeptDAOImpl implements IDeptDAO {
 				e.printStackTrace();
 			}
 			return listDTO;
+	}
+
+	@Override
+	public List<HallApprovalDTO> selectRequestsForDeletion(Integer deptId) {
+
+		 List<HallApprovalDTO> listDTO = new ArrayList<HallApprovalDTO>();
+			
+			String sqlQuery = "select hb.bookingid,hb.status,hb.requesteddate,hb.halldate,h.hallname,h.hallfloor\r\n"
+					+ "from hallbooking hb \r\n"
+					+ "Join hall h on hb.hallid_fk=h.hallid\r\n"
+					+ "where hb.status=? and hb.deptid_fk=?";
+			
+			try {
+				con = JDBCUtil.getJdbcConnection();
+				if (con != null) {
+					ps = con.prepareStatement(sqlQuery);
+				}
+				if (ps != null) {
+					ps.setString(1, "requested");
+					ps.setInt(2, deptId);
+					rs = ps.executeQuery();
+				}
+				if (rs != null) {
+					while (rs.next()) {
+						HallApprovalDTO dto=new HallApprovalDTO();
+						dto.setHallbookingid(rs.getInt(1));
+						dto.setStatus(rs.getString(2));
+						dto.setRequesteddate(rs.getDate(3));
+						dto.setHalldate(rs.getDate(4));
+						dto.setHallname(rs.getString(5));
+						dto.setHallfloor(rs.getString(6));
+						
+						listDTO.add(dto);
+						
+					}
+				}
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return listDTO;
+	}
+
+	@Override
+	public String deleteRequest(Integer bookingId) {
+		String status = "failure";
+		String sqlQuery = "delete from hallbooking where bookingid=?";
+		try {
+			con = JDBCUtil.getJdbcConnection();
+			if(con!=null) {
+				ps = con.prepareStatement(sqlQuery);
+			}
+			if(ps!=null) {
+				ps.setInt(1, bookingId);
+				int rowsEffected = ps.executeUpdate();
+				
+				if(rowsEffected==1) {
+					status="success";
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return status;
 	}
 	
 	
