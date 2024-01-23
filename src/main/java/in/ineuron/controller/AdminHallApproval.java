@@ -81,6 +81,7 @@ public class AdminHallApproval extends HttpServlet {
 		}
 		
 		if(request.getRequestURI().endsWith("/BookingHistory")) {
+		    System.out.println("AdminHallApproval.doProcess()");
 			List<HallApprovalDTO> dto = service.bookinghistory();
 			
 			request.setAttribute("dto", dto);

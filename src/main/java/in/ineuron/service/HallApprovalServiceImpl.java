@@ -41,7 +41,14 @@ public class HallApprovalServiceImpl implements IHallApprovalService {
 
 	@Override
 	public List<HallApprovalDTO> bookinghistory() {
-		return hallApprovalDAO.bookingHistory();
+		List<HallApprovalDTO> dto = hallApprovalDAO.bookingHistory();
+		if(dto.size()==0) {
+			System.out.println(dto);
+			dto=null;
+		}
+		//System.out.println(dto);
+		return dto;
+		
 	}
 
 }

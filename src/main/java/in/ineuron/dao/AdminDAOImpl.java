@@ -29,7 +29,7 @@ public class AdminDAOImpl implements IAdminDAO {
 			if (ps != null) {
 				ps.setString(1, department.getDeptname());
 				ps.setString(2, department.getDepthod());
-				ps.setString(3, department.getDeptname());
+				ps.setString(3, department.getDeptbranch());
 				ps.setString(4, department.getDeptpassword());
 				ps.setDate(5, department.getCreatedDate());
 				ps.setDate(6, department.getModifiedDate());
@@ -117,7 +117,7 @@ public class AdminDAOImpl implements IAdminDAO {
 			if (ps != null) {
 				ps.setString(1, department.getDeptname());
 				ps.setString(2, department.getDepthod());
-				ps.setString(3, department.getDeptname());
+				ps.setString(3, department.getDeptbranch());
 				ps.setString(4, department.getDeptpassword());
 				ps.setDate(5, department.getModifiedDate());
 				ps.setInt(6, 1);

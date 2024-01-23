@@ -35,15 +35,22 @@ public class AdminServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		if(request.getRequestURI().endsWith(("home"))) {
+			Boolean result=false;
+			if(session.getAttribute("isLoggedIn")==null) {
 			Integer loginid = Integer.parseInt(request.getParameter("loginid"));
 			String loginpassword = request.getParameter("loginpassword");
 			session.setAttribute("loginid", loginid);
-			Boolean result = service.isAdmin(loginid, loginpassword);
-			
+			result = service.isAdmin(loginid, loginpassword);
+			}
+			if(result) {
+				session.setAttribute("isLoggedIn", true);
+				}
+			if((Boolean)session.getAttribute("isLoggedIn")==true) {
 			RequestDispatcher rd = null;
 			rd = request.getRequestDispatcher("../JSP/Admin/AdminHomepage.jsp");
 			request.setAttribute("result", result);
 			rd.forward(request, response);
+			}
 		}
 		
 		if(request.getRequestURI().endsWith(("addDepartment"))) {
