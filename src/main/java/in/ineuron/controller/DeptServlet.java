@@ -40,25 +40,42 @@ public class DeptServlet extends HttpServlet {
 		HttpSession session = request.getSession();	
 		
 		if(request.getRequestURI().endsWith("/home")) {
+			String checkDept = "failure";
+			Integer loginid=null;
+			Boolean isDept=true;
+			String deptName=null;
+			if(session.getAttribute("checkDept")==null) {
 			System.out.println("Reached Dept");
-			Integer loginid = Integer.parseInt(request.getParameter("loginid"));
+			loginid = Integer.parseInt(request.getParameter("loginid"));
 			String loginpassword = request.getParameter("loginpassword");
 			System.out.println(loginid+" "+loginpassword);
 			
-			Boolean isDept = true;
+			//Boolean isDept = true;
 			
-			String deptName = service.checkDept(loginid, loginpassword);
+			deptName = service.checkDept(loginid, loginpassword);
+			}
 			if(deptName==null) {
 				isDept=false;
+				session.setAttribute("checkDept", checkDept);
 			}else {
+				checkDept="success";
+				session.setAttribute("checkDept", checkDept);
 				request.setAttribute("deptname", deptName);
 				session.setAttribute("loginid", loginid);
 			}
+			if(session.getAttribute("checkDept").toString().equalsIgnoreCase("success")) {
 			request.setAttribute("isDept", isDept);
 			RequestDispatcher rd = null;
 			rd = request.getRequestDispatcher("../JSP/Dept/DeptHome.jsp");
 			rd.forward(request, response);
 			System.out.println(deptName);
+			}else {
+				request.setAttribute("isDept", isDept);
+				RequestDispatcher rd = null;
+				rd = request.getRequestDispatcher("../JSP/Dept/DeptHome.jsp");
+				rd.forward(request, response);
+				System.out.println(deptName);
+			}
 		}
 		
 		if(request.getRequestURI().endsWith("/SearchHall")) {
